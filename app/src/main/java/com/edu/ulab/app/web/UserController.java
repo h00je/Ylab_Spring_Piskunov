@@ -24,8 +24,8 @@ import static com.edu.ulab.app.web.constant.WebConstant.RQID;
 public class UserController {
     private final UserDataFacade userDataFacade;
 
-    public UserController(UserDataFacade userDataFacade) {
-        this.userDataFacade = userDataFacade;
+      public UserController(UserDataFacade userDataFacade) {
+          this.userDataFacade = userDataFacade;
     }
 
     @PostMapping(value = "/create")
@@ -41,9 +41,10 @@ public class UserController {
         return response;
     }
 
-    @PutMapping(value = "/update")
-    public UserBookResponse updateUserWithBooks(@RequestBody UserBookRequest request) {
-        UserBookResponse response = userDataFacade.updateUserWithBooks(request);
+    @PutMapping(value = "/update/{userId}")
+    public UserBookResponse updateUserWithBooks(@RequestBody UserBookRequest request,
+                                                @PathVariable Long userId) {
+        UserBookResponse response = userDataFacade.updateUserWithBooks(request, userId);
         log.info("Response with updated user and his books: {}", response);
         return response;
     }
