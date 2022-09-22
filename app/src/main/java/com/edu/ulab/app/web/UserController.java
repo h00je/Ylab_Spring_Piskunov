@@ -5,6 +5,8 @@ import com.edu.ulab.app.web.constant.WebConstant;
 import com.edu.ulab.app.web.request.UserBookRequest;
 import com.edu.ulab.app.web.response.UserBookResponse;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -41,14 +43,33 @@ public class UserController {
         return response;
     }
 
-    @PutMapping(value = "/update")
-    public UserBookResponse updateUserWithBooks(@RequestBody UserBookRequest request) {
-        UserBookResponse response = userDataFacade.updateUserWithBooks(request);
+    @PutMapping(value = "/update/{userId}")
+    @Operation(summary = "Update user with books",
+            responses = {
+                    @ApiResponse(description = "User book",
+                            content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                    schema = @Schema(implementation = UserBookResponse.class)))
+            }, parameters = {
+            @Parameter(in = ParameterIn.PATH,
+                    name = "User id",
+                    required = true)
+    }
+    )
+    public UserBookResponse updateUserWithBooks(@RequestBody UserBookRequest request,
+                                                @PathVariable Long userId) {
+        UserBookResponse response = userDataFacade.updateUserWithBooks(request, userId);
         log.info("Response with updated user and his books: {}", response);
         return response;
     }
 
     @GetMapping(value = "/get/{userId}")
+    @Operation(summary = "Request user info",
+            parameters = {
+            @Parameter(in = ParameterIn.PATH,
+                    name = "User id",
+                    required = true)
+    }
+    )
     public UserBookResponse updateUserWithBooks(@PathVariable Long userId) {
         UserBookResponse response = userDataFacade.getUserWithBooks(userId);
         log.info("Response with user and his books: {}", response);
@@ -56,6 +77,13 @@ public class UserController {
     }
 
     @DeleteMapping(value = "/delete/{userId}")
+    @Operation(summary = "Delete user",
+            parameters = {
+                    @Parameter(in = ParameterIn.PATH,
+                            name = "User id",
+                            required = true)
+            }
+    )
     public void deleteUserWithBooks(@PathVariable Long userId) {
         log.info("Delete user and his books:  userId {}", userId);
         userDataFacade.deleteUserWithBooks(userId);
