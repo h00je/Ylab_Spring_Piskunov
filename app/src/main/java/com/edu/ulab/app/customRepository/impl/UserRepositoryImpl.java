@@ -1,6 +1,6 @@
 package com.edu.ulab.app.customRepository.impl;
 
-import com.edu.ulab.app.customRepository.CustomUserRepository;
+import com.edu.ulab.app.customRepository.UserRepository;
 import com.edu.ulab.app.entity.User;
 import com.edu.ulab.app.storage.Storage;
 import org.springframework.stereotype.Component;
@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 @Component
-public class CustomUserRepositoryImpl implements CustomUserRepository {
+public class UserRepositoryImpl implements UserRepository {
     private final Storage<Long, User> userStorage;
 
-    public CustomUserRepositoryImpl(Storage<Long, User> userStorage) {
+    public UserRepositoryImpl(Storage<Long, User> userStorage) {
         this.userStorage = userStorage;
     }
 

@@ -4,7 +4,7 @@ import com.edu.ulab.app.entity.User;
 
 import java.util.Optional;
 
-public interface CustomUserRepository {
+public interface UserRepository {
     User createUser(User user);
 
     User updateUser(User user);

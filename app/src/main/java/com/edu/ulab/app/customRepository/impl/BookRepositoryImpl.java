@@ -1,6 +1,6 @@
 package com.edu.ulab.app.customRepository.impl;
 
-import com.edu.ulab.app.customRepository.CustomBookRepository;
+import com.edu.ulab.app.customRepository.BookRepository;
 import com.edu.ulab.app.entity.Book;
 import com.edu.ulab.app.storage.Storage;
 import org.springframework.stereotype.Component;
@@ -8,10 +8,10 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-public class CustomBookRepositoryImpl implements CustomBookRepository {
+public class BookRepositoryImpl implements BookRepository {
     private final Storage<Long, Book> bookStorage;
 
-    public CustomBookRepositoryImpl(Storage<Long, Book> bookStorage) {
+    public BookRepositoryImpl(Storage<Long, Book> bookStorage) {
         this.bookStorage = bookStorage;
     }
 
